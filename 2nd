@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+const int N = 3;
+
+int main() {
+    srand(time(0));
+    int A[N][N], B[N][N], C[N][N];
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            A[i][j] = rand() % 10;
+            B[i][j] = rand() % 10;
+        }
+    }
+    
+    // measure the start time
+    clock_t start_time = clock();
+    
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            int sum = 0;
+            for (int k = 0; k < N; ++k) {
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+        }
+    }
+    
+    // measure the end time
+    clock_t end_time = clock();
+    
+    double execution_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    
+    std::cout << "Matrix A:\n";
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            std::cout << A[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+    
+    std::cout << "Matrix B:\n";
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            std::cout << B[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+    
+    std::cout << "Matrix C:\n";
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            std::cout << C[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+    
+    std::cout << "Execution time: " << execution_time * 1000000 << " microseconds\n";
+    
+    return 0;
+}
